@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+. `dirname $BASH_SOURCE`/../includes/alert_functions.sh
+
+GIT_DIFF=$(git diff --cached --unified=0 | grep -E '^((\+\s)|(\@\@))')
+POSSIBLE_XSS_VULNERABLE_CHANGES=`echo "$GIT_DIFF" | grep -E '(\{\{\{)|(\|safe)|(mark_safe)'`
+if [[ $POSSIBLE_XSS_VULNERABLE_CHANGES  ]]; then
+    BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    TO_SEND=`echo -e "Branch:$BRANCH\n$GIT_DIFF" | grep -E '(^Branch)|(^\@\@)|(\{\{\{)|(\|safe)|(mark_safe)' | grep -B 1 -E '^[^\@]'`
+    alert "$TO_SEND"
+fi
+

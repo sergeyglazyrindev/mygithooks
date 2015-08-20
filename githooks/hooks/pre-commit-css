@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+EXIT_CODE=0
+CURRENT=$(pwd)
+RES=""
+
+for FILE in `git diff-index HEAD -- | awk '{ if ($5 != "D") print $6 }' | grep ".*\.css$"`; do
+    RES="$RES$(csslint --ignore=import $FILE)"
+done
+
+if [[ -n $RES ]]; then
+    echo "$RES"
+    echo "CSSLint check is not passed."
+    exit 1
+fi
+
+exit 0

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+EXIT_CODE=0
+CURRENT=$(pwd)
+RES=""
+
+for FILE in `git diff-index HEAD -- | awk '{ if ($5 != "D") print $6 }' | grep ".*\.js$"`; do
+    echo "checking file $FILE"
+    RES="$RES\\n`jshint $FILE`"
+    EXIT_CODE=$((${EXIT_CODE} + $?))
+done
+
+if [[ ${EXIT_CODE} -ne 0 ]]; then
+    echo "$RES"
+    echo "JSHint detected syntax problems."
+    echo "Commit aborted."
+fi
+
+exit $((${EXIT_CODE}))
