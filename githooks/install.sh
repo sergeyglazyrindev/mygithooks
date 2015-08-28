@@ -11,5 +11,5 @@ fi
 mkdir "$BACKUP_DIR"
 cp $HOOK_DIR/* $BACKUP_DIR/
 rm -rf $HOOK_DIR
-ln -s "$PROJECT_DIR/githooks/hooks/" "$HOOK_DIR"
+ln -s $HOOK_DIRECTORY_SOURCE $HOOK_DIR
 echo "Done"
