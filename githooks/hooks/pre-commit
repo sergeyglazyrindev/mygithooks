@@ -9,7 +9,7 @@ rc=$?
 echo "$PYTHON_RES"
 
 if [[ $rc != 0 ]]; then
-    exit $rc;
+   exit $rc;
 fi
 
 CSS_RES=$(.git/hooks/pre-commit-css)
@@ -17,7 +17,7 @@ rc=$?
 echo "$CSS_RES"
 
 if [[ $rc != 0 ]]; then
-   exit $rc;
+  exit $rc;
 fi
 
 .git/hooks/pre-commit-xss-checking
