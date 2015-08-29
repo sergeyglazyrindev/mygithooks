@@ -5,5 +5,8 @@ Installation: move on to githooks directory, and execute following command:
 where is PROJECT_DIR is a root directory of your project.
 The hooks are being symlinked to the folder hooks from this repository.
 
-Make sure that flake8 is installed in your virtual environment:
-For now hooks validate python files, css, js files.
+Requirements:
+flake8 in your virtual environment
+csslint
+jshint
+For now hooks validate only python files, css, js files.
