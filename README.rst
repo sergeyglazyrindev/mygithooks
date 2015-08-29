@@ -7,7 +7,9 @@ The hooks are being symlinked to the folder hooks from this repository.
 
 Requirements:
 * flake8 in your virtual environment
+  
 * csslint
+  
 * jshint
   
 For now hooks validate only python files, css, js files.
