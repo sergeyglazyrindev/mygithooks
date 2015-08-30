@@ -29,7 +29,7 @@ def main():
             os.makedirs(filepath)
         with open(filename, 'w') as f:
             system('git', 'show', ':%s' % name, stdout=f)
-    output = system('flake8', './', cwd=tempdir)
+    output = system('flake8', '--ignore=E501', './', cwd=tempdir)
     shutil.rmtree(tempdir)
     if output:
         print(output)
