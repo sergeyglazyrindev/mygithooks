@@ -2,11 +2,12 @@
 
 EXIT_CODE=0
 CURRENT=$(pwd)
+CURRENT_DIRECTORY=`dirname $BASH_SOURCE`
 RES=""
 
 for FILE in `git diff-index HEAD -- | awk '{ if ($5 != "D") print $6 }' | grep ".*\.js$"`; do
     echo "checking file $FILE"
-    RES="$RES\\n`jshint $FILE`"
+    RES="$RES\\n`jshint -c ${CURRENT_DIRECTORY}/.jshintrc $FILE`"
     EXIT_CODE=$((${EXIT_CODE} + $?))
 done
 
