@@ -17,7 +17,7 @@ def system(*args, **kwargs):
 
 def main():
     modified = re.compile('^[AM]+\s+(?P<name>.*\.py(?:\.\w+)?)', re.MULTILINE)
-    files = system('git', 'status', '--porcelain')
+    files = system('git', 'status', '--porcelain') or ''
     files = modified.findall(files)
 
     tempdir = tempfile.mkdtemp()
