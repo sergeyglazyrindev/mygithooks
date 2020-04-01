@@ -16,8 +16,13 @@ def system(*args, **kwargs):
     return out.decode() if out else None
 
 def main():
-    modified = re.compile('^[AM]+\s+(?P<name>.*\.py(?:\.\w+)?)', re.MULTILINE)
-    files = system('git', 'status', '--porcelain') or ''
+    if os.environ.get('NORMAL_GIT_FLOW'):
+        modified = re.compile('^[AM]+\s+(?P<name>.*\.py(?:\.\w+)?)', re.MULTILINE)
+        files = system('git', 'status', '--porcelain') or ''
+    elif os.environ.get('GERRIT_FLOW'):
+        modified = re.compile(r'^(?P<name>.*\.py)$', re.MULTILINE)
+        files = system('git', 'show', '--name-only', '--pretty=format:') or ''
+    print(files)
     files = modified.findall(files)
 
     tempdir = tempfile.mkdtemp()

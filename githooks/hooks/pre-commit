@@ -7,18 +7,16 @@ activate_venv
 PYTHON_RES=$(.git/hooks/pre-commit-python)
 rc=$?
 echo "$PYTHON_RES"
-
 if [[ $rc != 0 ]]; then
    exit $rc;
 fi
+# CSS_RES=$(.git/hooks/pre-commit-css)
+# rc=$?
+# echo "$CSS_RES"
 
-CSS_RES=$(.git/hooks/pre-commit-css)
-rc=$?
-echo "$CSS_RES"
+# if [[ $rc != 0 ]]; then
+#   exit $rc;
+# fi
 
-if [[ $rc != 0 ]]; then
-  exit $rc;
-fi
-
-.git/hooks/pre-commit-xss-checking
-.git/hooks/pre-commit-javascript
+# .git/hooks/pre-commit-xss-checking
+# .git/hooks/pre-commit-javascript
